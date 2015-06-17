@@ -51,6 +51,35 @@ public class BinaryTree<T extends Comparable<T>> {
         }
     }
 
+
+    public void walkInfixed(Action<T> action) {
+        if (root == null) {
+            return;
+        }
+
+        if (root.hasLeft()) {
+            walkInfixedAux(root.getLeft(), action);
+        }
+
+        action.apply(root);
+
+        if (root.hasRight()) {
+            walkInfixedAux(root.getRight(), action);
+        }
+    }
+
+    private void walkInfixedAux(TreeNode<T> actual, Action<T> action) {
+        if (actual.hasLeft()) {
+            walkPrefixedAux(actual.getLeft(), action);
+        }
+
+        action.apply(actual);
+
+        if (actual.hasRight()) {
+            walkPrefixedAux(actual.getRight(), action);
+        }
+    }
+
     public void walkPrefixed(Action<T> action) {
         if (root == null) {
             return;
@@ -69,36 +98,41 @@ public class BinaryTree<T extends Comparable<T>> {
 
     private void walkPrefixedAux(TreeNode<T> actual, Action<T> action) {
         action.apply(actual);
+
         if (actual.hasLeft()) {
             walkPrefixedAux(actual.getLeft(), action);
-            if (actual.hasRight()) {
-                walkPrefixedAux(actual.getRight(), action);
-            }
-        } else if (actual.hasRight()) {
-            action.apply(actual);
+        }
+
+        if (actual.hasRight()) {
             walkPrefixedAux(actual.getRight(), action);
-            if (actual.hasLeft()) {
-                walkPrefixedAux(actual.getLeft(), action);
-            }
         }
     }
 
-    private void walkPostfixed(Action<T> action) {
-        if (root != null) {
-            if (root.hasLeft()) {
-                walkPostfixed(root.getLeft(), action);
-            }
-
-            if (root.hasRight()) {
-                walkPostfixed(root.getRight(), action);
-            }
-
-            action.apply(root);
+    public void walkPostfixed(Action<T> action) {
+        if (root == null) {
+            return;
         }
+
+        if (root.hasLeft()) {
+            walkPrefixedAux(root.getLeft(), action);
+        }
+
+        if (root.hasRight()) {
+            walkPrefixedAux(root.getRight(), action);
+        }
+        action.apply(root);
     }
 
-    private void walkPostfixed(TreeNode<T> node, Action<T> action) {
+    private void walkPostfixedAux(TreeNode<T> actual, Action<T> action) {
 
+        if (actual.hasLeft()) {
+            walkPostfixedAux(actual.getLeft(), action);
+        }
+
+        if (actual.hasRight()) {
+            walkPostfixedAux(actual.getRight(), action);
+        }
+        action.apply(actual);
     }
 
     public int maxLevel() {
@@ -456,16 +490,16 @@ public class BinaryTree<T extends Comparable<T>> {
         tree.add(88);
         tree.add(23);
 
-        BinaryTree<Integer> tree2 = new BinaryTree<>();
-        tree2.add(85);
-        tree2.add(69);
-        tree2.add(110);
-        tree2.add(49);
-        tree2.add(70);
-        tree2.add(95);
-        tree2.add(120);
-        tree2.add(88);
-        tree2.add(23);
+//        BinaryTree<Integer> tree2 = new BinaryTree<>();
+//        tree2.add(85);
+//        tree2.add(69);
+//        tree2.add(110);
+//        tree2.add(49);
+//        tree2.add(70);
+//        tree2.add(95);
+//        tree2.add(120);
+//        tree2.add(88);
+//        tree2.add(23);
 
 //        System.out.println("MaxLevel: " + tree.maxLevel());
 //        System.out.println("Size: " + tree.size());
@@ -486,15 +520,30 @@ public class BinaryTree<T extends Comparable<T>> {
             }
         });
 
-        tree.removeNode(110);
-
-        System.out.println("###################################");
-        tree.walkPrefixed(new Action<Integer>() {
+        System.out.println("=================================================");
+        tree.walkInfixed(new Action<Integer>() {
             @Override
             public void apply(TreeNode<Integer> node) {
                 System.out.println(node.getData());
             }
         });
+
+        System.out.println("=================================================");
+        tree.walkPostfixed(new Action<Integer>() {
+            @Override
+            public void apply(TreeNode<Integer> node) {
+                System.out.println(node.getData());
+            }
+        });
+//        tree.removeNode(110);
+
+//        System.out.println("###################################");
+//        tree.walkPrefixed(new Action<Integer>() {
+//            @Override
+//            public void apply(TreeNode<Integer> node) {
+//                System.out.println(node.getData());
+//            }
+//        });
     }
 
 }
