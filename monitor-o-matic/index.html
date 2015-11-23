@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app="monitorOMaticApp">
+<head>
+  <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./style/main.css">
+</head>
+<body>
+
+  <ng-include src="'fragments/navbars/topNav.html'"></ng-include>
+
+  <div id="main-content" class="container-fluid">
+
+    <div ui-view>
+
+    </div>
+
+  </div>
+
+  <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script src="./bundle/main.js"></script>
+
+</body>
+</html>

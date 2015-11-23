@@ -1,0 +1,18 @@
+{
+  "name": "monitor-o-matic",
+  "version": "1.0.0",
+  "homepage": "https://github.com/thomas-adriano/FURB",
+  "authors": [
+    "thomas-adriano <thomasadrianodev@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0",
+    "jquery": "~2.1.4",
+    "Chart.js": "~1.0.2"
+  }
+}

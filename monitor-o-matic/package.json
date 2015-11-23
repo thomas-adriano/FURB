@@ -1,0 +1,24 @@
+{
+  "name": "monitor-o-matic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^12.0.1",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^4.0.1",
+    "watchify": "^3.6.0"
+  },
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-route": "^1.4.8",
+    "angular-ui-mask": "^1.6.1",
+    "chart.js": "^1.0.2",
+    "ui-router": "^0.2.15"
+  }
+}
